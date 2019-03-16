@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-
+var config = require("../config/jwt_secret")
 // Load input validation
 const validateRegisterInput = require("../utils/register")
 const validateLoginInput = require("../utils/login")
@@ -64,7 +64,7 @@ exports.userLogin = function (req, res, next) {
 				// Sign token
 				jwt.sign(
 					payload,
-					process.env.JWT_SECRET,
+					config.jwt_secret,
 					{
 						expiresIn: 31556926 // 1 year in seconds
 					},

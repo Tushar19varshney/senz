@@ -7,6 +7,6 @@ var usersRoute = require("./users/routes")
 // Routes
 
 // -> /api/users/
-router.use("/api/users", usersRoute)
+router.use("/api/auth", usersRoute)
 
 module.exports = router

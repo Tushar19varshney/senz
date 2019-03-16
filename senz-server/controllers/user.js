@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken")
 
 // Load input validation
-const validateRegisterInput = require("../validation/register")
-const validateLoginInput = require("../validation/login")
+const validateRegisterInput = require("../utils/register")
+const validateLoginInput = require("../utils/login")
 
 // Load User model
 const User = require("../models/user")
@@ -71,7 +71,7 @@ exports.userLogin = function (req, res, next) {
 					(err, token) => {
 						res.json({
 							success: true,
-							token: "Bearer " + token
+							token:token
 						})
 					}
 				)

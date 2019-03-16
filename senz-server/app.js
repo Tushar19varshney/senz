@@ -3,7 +3,7 @@ var express = require("express")
 var mongoose = require("mongoose")
 var cookieParser = require("cookie-parser")
 var logger = require("morgan")
-
+let config = require("./config/db_uri")
 var indexRouter = require("./routes/routes")
 
 var app = express()
@@ -17,14 +17,8 @@ app.use(cookieParser())
 app.use("/", indexRouter)
 
 // Connect to MongoDB
-var dbHost = process.env.DB_HOST || "localhost"
-var dbName = process.env.DB_NAME
-var dbUser = process.env.DB_USERNAME
-var dbPass = process.env.DB_PASSWORD
-
-
 mongoose
-	.connect("" + dbHost + "://"+ dbUser + ":" + dbPass + "@ds163835.mlab.com:63835/" + dbName, { promiseLibrary: require("bluebird"), useNewUrlParser: true })
+	.connect(config.mongoURI, { promiseLibrary: require("bluebird"), useNewUrlParser: true })
 	.then(() => console.log("MongoDb connected successfully!"))
 	.catch(err => console.error(err))
 

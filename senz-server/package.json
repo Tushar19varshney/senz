@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "mocha --timeout 10000"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,6 +25,10 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
-    "eslint": "^5.15.1"
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^5.15.1",
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10"
   }
 }

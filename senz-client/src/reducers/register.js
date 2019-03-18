@@ -21,7 +21,6 @@ const register = (state = intialState , action )=>{
 			error:false
 		}
 	case "REGISTER_USER_FAILURE":
-		console.log(action)
 		return {
 			...state,
 			isRegistering:false,

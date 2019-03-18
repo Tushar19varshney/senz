@@ -7,7 +7,6 @@ export const setData = (data,callback)=>{
 		dispatch({
 			type: "LOGIN_USER_REQUEST"
 		})
-		console.log(data)
 		dispatch({
 			type: "LOGIN_USER_SUCCESS",
 			payload: data
@@ -71,7 +70,7 @@ export const userregister=(data,callback)=>{
 			url: "http://localhost:8000/api/auth/register",
 			data:data,
 			responseType: "json"})
-			.then(res => {
+			.then(() => {
 				dispatch({
 					type: "REGISTER_USER_SUCCESS",
 					payload: "Login to continue"

@@ -5,11 +5,13 @@ var cookieParser = require("cookie-parser")
 var logger = require("morgan")
 let config = require("./config/db_uri")
 var indexRouter = require("./routes/routes")
+let cors = require("cors")
 
 var app = express()
 
 
 app.use(logger("dev"))
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())

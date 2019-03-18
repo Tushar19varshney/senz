@@ -19,14 +19,15 @@ exports.userRegister = function (req, res, next) {
 	}
 	User.findOne({ email: req.body.email }).then(user => {
 		if (user) {
-			return res.status(400).json({ email: "Email already exists" })
+			return res.status(400).json({ msg: "Email already exists", err_field:"email" })
 		}
 		const newUser = new User({
 			name: req.body.name,
+			username:req.body.username,
 			email: req.body.email,
 			password: req.body.password
 		})
-		newUser.save().then(user => res.json(user)).catch(err => console.log(err))
+		newUser.save().then(user => res.json({user, msg:"You are successfully registered!"})).catch(err => console.log(err))
 	})
 }
 
@@ -49,7 +50,7 @@ exports.userLogin = function (req, res, next) {
 	User.findOne({ email }).then(user => {
 		// Check if user exists
 		if (!user) {
-			return res.status(404).json({ emailnotfound: "Email not found" })
+			return res.status(404).json({ msg: "Email not found",err_field:"email" })
 		}
 
 		user.comparePassword(password, function (err, isMatch) {
@@ -58,7 +59,9 @@ exports.userLogin = function (req, res, next) {
 				// Create JWT Payload
 				const payload = {
 					id: user.id,
-					name: user.name
+					name: user.name,
+					username:user.username,
+					email:user.email
 				}
 
 				// Sign token
@@ -71,14 +74,15 @@ exports.userLogin = function (req, res, next) {
 					(err, token) => {
 						res.json({
 							success: true,
-							token:token
+							token:token,
+							msg: "You are successfully logged in!"
 						})
 					}
 				)
 			} else {
 				return res
 					.status(401)
-					.json({ passwordincorrect: "Password incorrect" })
+					.json({ msg: "Password incorrect", err_field:"password" })
 			}
 		})
 	})

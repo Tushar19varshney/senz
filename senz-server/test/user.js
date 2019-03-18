@@ -67,7 +67,7 @@ describe("Authentication tests", async () => {
 			.end((err, data) => {
 				if(data.body){
 					expect(data.body).to.be.an("object")
-					expect(data.body).to.not.have.property("msg")
+					expect(data.body).to.have.property("msg")
 					expect(data.body).to.have.property("success",true)
 					expect(data.body).to.have.property("token")
 					done()

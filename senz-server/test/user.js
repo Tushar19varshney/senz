@@ -9,6 +9,7 @@ let config = require("../config/db_uri")
 
 const info={
 	name:"name",
+	username:"username",
 	email:"email@gmail.com",
 	password:"password",
 	password2:"password"
@@ -49,8 +50,8 @@ describe("Authentication tests", async () => {
 				if(data){
 					expect(data).to.have.an("object")
 					expect(data).to.not.have.property("password2","Passwords must match")
-					expect(data).to.not.have.property("emailnotfound","Email not found")
-					expect(data).to.not.have.property("email","Email already exists")
+					expect(data).to.not.have.property("msg","Email not found")
+					expect(data).to.not.have.property("msg","Email already exists")
 					done()
 				}
 			})
@@ -66,7 +67,7 @@ describe("Authentication tests", async () => {
 			.end((err, data) => {
 				if(data.body){
 					expect(data.body).to.be.an("object")
-					expect(data.body).to.not.have.property("emailnotfound")
+					expect(data.body).to.not.have.property("msg")
 					expect(data.body).to.have.property("success",true)
 					expect(data.body).to.have.property("token")
 					done()
